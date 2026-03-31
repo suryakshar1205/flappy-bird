@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flappy Voice</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1>Flappy Voice</h1>
+      <div class="status-row">
+        <span id="voice-status" class="chip chip-muted">Voice: Off</span>
+        <span id="score-chip" class="chip">Score: 0</span>
+        <span id="best-chip" class="chip">Best: 0</span>
+      </div>
+    </header>
+
+    <section class="game-wrap">
+      <canvas id="game" width="420" height="700" aria-label="Flappy Voice game canvas"></canvas>
+
+      <div id="overlay" class="overlay">
+        <h2 id="overlay-title">Ready</h2>
+        <p id="overlay-subtitle">Say <strong>jump</strong> or press <strong>Space</strong> to flap</p>
+        <div class="overlay-actions">
+          <button id="start-btn" class="btn btn-primary" type="button">Start Game</button>
+          <button id="voice-btn" class="btn" type="button">Enable Voice</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="help">
+      <span>Controls: Space/Click to flap, R to restart, Q to reset to menu.</span>
+      <span>Voice command: "jump"</span>
+    </footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

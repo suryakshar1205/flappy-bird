@@ -1,0 +1,105 @@
+import json
+from pathlib import Path
+
+
+_SHARED_SETTINGS_PATH = Path(__file__).with_name("shared_settings.json")
+_DEFAULT_SHARED_SETTINGS = {
+    "WIDTH": 658,
+    "HEIGHT": 518,
+    "DEFAULT_SCALE": 2,
+    "MAX_WINDOW_RATIO": 0.9,
+    "FPS": 60,
+    "GRAVITY": 0.19,
+    "MIN_JUMP_FORCE": -2.3,
+    "MAX_JUMP_FORCE": -3.6,
+    "PIPE_GAP": 130,
+    "PIPE_SPEED": 1.5,
+    "PIPE_SPAWN_RATE": 100,
+    "GROUND_HEIGHT": 100,
+    "MIC_TRIGGER": 0.02,
+    "MIC_MAX_LEVEL": 0.4,
+    "JUMP_COOLDOWN": 10,
+    "START_DELAY_MS": 300,
+    "ROUND_GRACE_MS": 300,
+    "MIC_HISTORY_SIZE": 3,
+    "MIC_RESPONSE_BLEND": 0.45,
+    "MIC_BLOCKSIZE": 256,
+    "MIC_INPUT_GAIN": 14.0,
+    "MIC_NOISE_FLOOR_DECAY": 0.02,
+    "MIC_NOISE_FLOOR_RISE": 0.14,
+    "MIC_PEAK_DECAY": 0.992,
+    "MIC_ATTACK_TRIGGER": 0.025,
+    "MIC_REARM_RATIO": 0.55,
+    "TOP_OUT_LIMIT": -60,
+}
+
+
+def _load_shared_settings():
+    if not _SHARED_SETTINGS_PATH.exists():
+        return dict(_DEFAULT_SHARED_SETTINGS)
+
+    try:
+        with _SHARED_SETTINGS_PATH.open("r", encoding="utf-8") as file_handle:
+            loaded = json.load(file_handle)
+    except Exception:
+        return dict(_DEFAULT_SHARED_SETTINGS)
+
+    merged = dict(_DEFAULT_SHARED_SETTINGS)
+    if isinstance(loaded, dict):
+        merged.update(loaded)
+    return merged
+
+
+_SHARED = _load_shared_settings()
+
+
+# Screen
+WIDTH = int(_SHARED["WIDTH"])
+HEIGHT = int(_SHARED["HEIGHT"])
+DEFAULT_SCALE = float(_SHARED["DEFAULT_SCALE"])
+WINDOW_WIDTH = int(WIDTH * DEFAULT_SCALE)
+WINDOW_HEIGHT = int(HEIGHT * DEFAULT_SCALE)
+MAX_WINDOW_RATIO = float(_SHARED["MAX_WINDOW_RATIO"])
+
+# Performance
+FPS = int(_SHARED["FPS"])
+
+# Bird physics
+GRAVITY = float(_SHARED["GRAVITY"])
+MIN_JUMP_FORCE = float(_SHARED["MIN_JUMP_FORCE"])
+MAX_JUMP_FORCE = float(_SHARED["MAX_JUMP_FORCE"])
+
+# Pipes
+PIPE_GAP = int(_SHARED["PIPE_GAP"])
+PIPE_SPEED = float(_SHARED["PIPE_SPEED"])
+PIPE_SPAWN_RATE = int(_SHARED["PIPE_SPAWN_RATE"])
+
+# Ground
+GROUND_HEIGHT = int(_SHARED["GROUND_HEIGHT"])
+
+# Microphone
+MIC_TRIGGER = float(_SHARED["MIC_TRIGGER"])
+MIC_MAX_LEVEL = float(_SHARED["MIC_MAX_LEVEL"])
+JUMP_COOLDOWN = int(_SHARED["JUMP_COOLDOWN"])
+START_DELAY_MS = int(_SHARED["START_DELAY_MS"])
+ROUND_GRACE_MS = int(_SHARED["ROUND_GRACE_MS"])
+MIC_HISTORY_SIZE = int(_SHARED["MIC_HISTORY_SIZE"])
+MIC_RESPONSE_BLEND = float(_SHARED["MIC_RESPONSE_BLEND"])
+MIC_BLOCKSIZE = int(_SHARED["MIC_BLOCKSIZE"])
+MIC_INPUT_GAIN = float(_SHARED["MIC_INPUT_GAIN"])
+MIC_NOISE_FLOOR_DECAY = float(_SHARED["MIC_NOISE_FLOOR_DECAY"])
+MIC_NOISE_FLOOR_RISE = float(_SHARED["MIC_NOISE_FLOOR_RISE"])
+MIC_PEAK_DECAY = float(_SHARED["MIC_PEAK_DECAY"])
+MIC_ATTACK_TRIGGER = float(_SHARED["MIC_ATTACK_TRIGGER"])
+MIC_REARM_RATIO = float(_SHARED["MIC_REARM_RATIO"])
+TOP_OUT_LIMIT = int(_SHARED["TOP_OUT_LIMIT"])
+
+# UI
+PANEL_COLOR = (255, 255, 255)
+PANEL_SHADOW = (0, 0, 0, 90)
+TEXT_COLOR = (255, 255, 255)
+TEXT_DARK = (39, 52, 73)
+ACCENT_COLOR = (255, 207, 84)
+GOOD_COLOR = (94, 214, 104)
+WARN_COLOR = (240, 85, 85)
+TITLE_COLOR = (255, 244, 214)

@@ -1,0 +1,8 @@
+{
+  "name": "flappy-voice",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sanity-check": "node ./scripts/sanity-check.mjs"
+  }
+}
