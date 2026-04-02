@@ -1,9 +1,4 @@
-import json
-from pathlib import Path
-
-
-_SHARED_SETTINGS_PATH = Path(__file__).with_name("shared_settings.json")
-_DEFAULT_SHARED_SETTINGS = {
+_DEFAULT_SETTINGS = {
     "WIDTH": 658,
     "HEIGHT": 518,
     "DEFAULT_SCALE": 2,
@@ -34,23 +29,7 @@ _DEFAULT_SHARED_SETTINGS = {
 }
 
 
-def _load_shared_settings():
-    if not _SHARED_SETTINGS_PATH.exists():
-        return dict(_DEFAULT_SHARED_SETTINGS)
-
-    try:
-        with _SHARED_SETTINGS_PATH.open("r", encoding="utf-8") as file_handle:
-            loaded = json.load(file_handle)
-    except Exception:
-        return dict(_DEFAULT_SHARED_SETTINGS)
-
-    merged = dict(_DEFAULT_SHARED_SETTINGS)
-    if isinstance(loaded, dict):
-        merged.update(loaded)
-    return merged
-
-
-_SHARED = _load_shared_settings()
+_SHARED = dict(_DEFAULT_SETTINGS)
 
 
 # Screen
