@@ -278,6 +278,7 @@ while True:
     round_start_time = pygame.time.get_ticks()
 
     running = True
+    return_to_menu = False
 
     # ---------------- GAME LOOP ---------------- #
 
@@ -292,7 +293,11 @@ while True:
                 window = pygame.display.set_mode(event.size, pygame.RESIZABLE)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
-                quit_game()
+                return_to_menu = True
+                running = False
+
+        if return_to_menu:
+            break
 
         volume = audio_input.volume
         jump_timer -= 1
@@ -385,6 +390,10 @@ while True:
 
         viewport = present(window, game_surface)
 
+    if return_to_menu:
+        show_start_menu = True
+        continue
+
     # ---------------- SAVE HIGHSCORE ---------------- #
 
     top_scores = save_score(score)
@@ -453,7 +462,9 @@ while True:
                     break
 
                 if event.key == pygame.K_q:
-                    quit_game()
+                    return_to_menu = True
+                    game_over = False
+                    break
 
                 if event.key == pygame.K_ESCAPE:
                     quit_game()

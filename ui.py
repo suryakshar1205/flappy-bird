@@ -62,7 +62,7 @@ def draw_game_over_overlay(screen, fonts, score, highscore, restart_rect, quit_r
     draw_text(screen, "Session Over", fonts["title"], settings.TEXT_COLOR, center=(screen.get_width() // 2, 124))
     draw_text(screen, f"Score: {score}", fonts["body"], settings.TEXT_COLOR, center=(screen.get_width() // 2, 170))
     draw_text(screen, f"Best: {highscore}", fonts["small"], settings.ACCENT_COLOR, center=(screen.get_width() // 2, 194))
-    draw_text(screen, "R: Restart | Q: Quit", fonts["small"], settings.TEXT_COLOR, center=(screen.get_width() // 2, 230))
+    draw_text(screen, "R: Restart | Q: Menu", fonts["small"], settings.TEXT_COLOR, center=(screen.get_width() // 2, 230))
 
     pygame.draw.rect(screen, settings.PANEL_COLOR, restart_rect.inflate(10, 10), 2, border_radius=10)
     pygame.draw.rect(screen, settings.PANEL_COLOR, quit_rect.inflate(10, 10), 2, border_radius=10)
