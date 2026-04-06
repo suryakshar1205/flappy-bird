@@ -8,6 +8,8 @@ Thumbs.db
 .venv/
 venv/
 env/
+build/
+dist/
 
 # IDE
 .vscode/

@@ -3,6 +3,7 @@ import pygame
 import audio_input
 import settings
 import ui
+from app_paths import resource_path
 from bird import Bird
 from pipes import Pipe
 from score_manager import load_highscore, load_top_scores, save_score
@@ -76,6 +77,11 @@ def get_jump_strength(volume):
     normalized = max(0.0, min(1.0, normalized))
     softened = normalized * normalized
     return min(0.8, softened)
+
+
+def load_image(*parts, alpha=True):
+    image = pygame.image.load(resource_path(*parts))
+    return image.convert_alpha() if alpha else image.convert()
 
 
 def draw_scrolling_base(screen, base_image, base_x):
@@ -209,21 +215,21 @@ fonts = {
 
 # ---------------- LOAD ASSETS ---------------- #
 
-bg = pygame.image.load("assets/background-day.png").convert()
+bg = load_image("assets", "background-day.png", alpha=False)
 bg = pygame.transform.scale(bg, (settings.WIDTH, settings.HEIGHT))
 
-base = pygame.image.load("assets/base.png").convert_alpha()
+base = load_image("assets", "base.png")
 
-game_over_img = pygame.image.load("assets/gameover.png").convert_alpha()
-restart_img = pygame.image.load("assets/restart-button.png").convert_alpha()
+game_over_img = load_image("assets", "gameover.png")
+restart_img = load_image("assets", "restart-button.png")
 
-quit_img = pygame.image.load("assets/quit-button.png").convert_alpha()
+quit_img = load_image("assets", "quit-button.png")
 quit_img = pygame.transform.scale(quit_img, (90, 30))
 
-pipe_img = pygame.image.load("assets/pipe-green.png").convert_alpha()
+pipe_img = load_image("assets", "pipe-green.png")
 
-message = pygame.image.load("assets/message.png").convert_alpha()
-start_btn_img = pygame.image.load("assets/start_button.png").convert_alpha()
+message = load_image("assets", "message.png")
+start_btn_img = load_image("assets", "start_button.png")
 
 start_btn_w, start_btn_h = start_btn_img.get_size()
 start_scale = min(180 / start_btn_w, 64 / start_btn_h, 1.0)
@@ -236,22 +242,22 @@ start_btn_img = pygame.transform.smoothscale(
 )
 
 score_images = [
-    pygame.image.load("assets/0.png").convert_alpha(),
-    pygame.image.load("assets/1.png").convert_alpha(),
-    pygame.image.load("assets/2.png").convert_alpha(),
-    pygame.image.load("assets/3.png").convert_alpha(),
-    pygame.image.load("assets/4.png").convert_alpha(),
-    pygame.image.load("assets/5.png").convert_alpha(),
-    pygame.image.load("assets/6.png").convert_alpha(),
-    pygame.image.load("assets/7.png").convert_alpha(),
-    pygame.image.load("assets/8.png").convert_alpha(),
-    pygame.image.load("assets/9.png").convert_alpha(),
+    load_image("assets", "0.png"),
+    load_image("assets", "1.png"),
+    load_image("assets", "2.png"),
+    load_image("assets", "3.png"),
+    load_image("assets", "4.png"),
+    load_image("assets", "5.png"),
+    load_image("assets", "6.png"),
+    load_image("assets", "7.png"),
+    load_image("assets", "8.png"),
+    load_image("assets", "9.png"),
 ]
 
 bird_frames = [
-    pygame.image.load("assets/bluebird-downflap.png").convert_alpha(),
-    pygame.image.load("assets/bluebird-midflap.png").convert_alpha(),
-    pygame.image.load("assets/bluebird-upflap.png").convert_alpha(),
+    load_image("assets", "bluebird-downflap.png"),
+    load_image("assets", "bluebird-midflap.png"),
+    load_image("assets", "bluebird-upflap.png"),
 ]
 
 # ---------------- MICROPHONE ---------------- #
