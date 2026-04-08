@@ -61,8 +61,13 @@ def audio_callback(indata, frames, time_info, status):
     attack = max(0.0, volume - previous_level)
     if (
         trigger_armed
-        and volume >= settings.MIC_TRIGGER
-        and attack >= settings.MIC_ATTACK_TRIGGER
+        and (
+            (
+                volume >= settings.MIC_TRIGGER
+                and attack >= settings.MIC_ATTACK_TRIGGER
+            )
+            or volume >= settings.MIC_TRIGGER * settings.MIC_HARD_TRIGGER_RATIO
+        )
     ):
         trigger_level = volume
         trigger_armed = False

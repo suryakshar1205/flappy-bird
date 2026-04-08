@@ -71,12 +71,12 @@ def get_jump_strength(volume):
 
     span = settings.MIC_MAX_LEVEL - settings.MIC_TRIGGER
     if span <= 0:
-        return 0.8
+        return 0.65
 
     normalized = (volume - settings.MIC_TRIGGER) / span
     normalized = max(0.0, min(1.0, normalized))
-    softened = normalized * normalized
-    return min(0.8, softened)
+    eased = normalized ** 0.65
+    return min(1.0, 0.3 + eased * 0.7)
 
 
 def load_image(*parts, alpha=True):
@@ -303,6 +303,8 @@ while True:
                 running = False
 
         if return_to_menu:
+            if score > 0:
+                save_score(score)
             break
 
         volume = audio_input.volume

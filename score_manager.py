@@ -16,10 +16,18 @@ MAX_LEADERBOARD_SCORES = 5
 def _ensure_data_files():
     APP_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    if not LEADERBOARD_FILE.exists() and LEGACY_LEADERBOARD_FILE.exists():
+    if (
+        APP_DATA_DIR != LEGACY_DATA_DIR
+        and not LEADERBOARD_FILE.exists()
+        and LEGACY_LEADERBOARD_FILE.exists()
+    ):
         shutil.copy2(LEGACY_LEADERBOARD_FILE, LEADERBOARD_FILE)
 
-    if not HIGHSCORE_FILE.exists() and LEGACY_HIGHSCORE_FILE.exists():
+    if (
+        APP_DATA_DIR != LEGACY_DATA_DIR
+        and not HIGHSCORE_FILE.exists()
+        and LEGACY_HIGHSCORE_FILE.exists()
+    ):
         shutil.copy2(LEGACY_HIGHSCORE_FILE, HIGHSCORE_FILE)
 
 

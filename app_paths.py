@@ -15,7 +15,14 @@ def resource_path(*parts):
     return str(base_path.joinpath(*parts))
 
 
+def is_packaged_app():
+    return bool(getattr(sys, "frozen", False) or hasattr(sys, "_MEIPASS"))
+
+
 def user_data_dir():
+    if not is_packaged_app():
+        return Path(__file__).resolve().parent
+
     local_app_data = os.getenv("LOCALAPPDATA")
 
     if local_app_data:
