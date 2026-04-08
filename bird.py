@@ -1,5 +1,5 @@
 import pygame
-from settings import GRAVITY, MAX_JUMP_FORCE, MIN_JUMP_FORCE
+import settings
 
 
 class Bird:
@@ -17,13 +17,18 @@ class Bird:
 
     def jump(self, strength=1.0):
         strength = max(0.0, min(1.0, strength))
-        jump_force = MIN_JUMP_FORCE + (MAX_JUMP_FORCE - MIN_JUMP_FORCE) * strength
+        # Soften weak voice triggers so small sounds do not create huge hops.
+        strength = strength ** 1.75
+        jump_force = (
+            settings.MIN_JUMP_FORCE
+            + (settings.MAX_JUMP_FORCE - settings.MIN_JUMP_FORCE) * strength
+        )
         self.velocity = jump_force
 
     def update(self):
 
         # apply gravity
-        self.velocity += GRAVITY
+        self.velocity += settings.GRAVITY
 
         # limit fall speed
         if self.velocity > 4:

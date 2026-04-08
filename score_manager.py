@@ -1,11 +1,11 @@
 import shutil
 from pathlib import Path
 
-from app_paths import user_data_dir
+from app_paths import resource_path, user_data_dir
 
 
 APP_DATA_DIR = user_data_dir() / "data"
-LEGACY_DATA_DIR = Path(__file__).resolve().parent / "data"
+LEGACY_DATA_DIR = Path(resource_path("data"))
 HIGHSCORE_FILE = APP_DATA_DIR / "highscore.txt"
 LEADERBOARD_FILE = APP_DATA_DIR / "top_scores.txt"
 LEGACY_HIGHSCORE_FILE = LEGACY_DATA_DIR / "highscore.txt"

@@ -13,7 +13,10 @@ a = Analysis(
     ["main.py"],
     pathex=[str(project_root)],
     binaries=sounddevice_binaries,
-    datas=[(str(project_root / "assets"), "assets")] + sounddevice_datas,
+    datas=[
+        (str(project_root / "assets"), "assets"),
+        (str(project_root / "data"), "data"),
+    ] + sounddevice_datas,
     hiddenimports=sounddevice_hiddenimports,
     hookspath=[],
     hooksconfig={},
